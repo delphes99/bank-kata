@@ -1,12 +1,20 @@
 package fr.lgl;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Transaction {
-    private Amount amount;
 
-    public Transaction(Amount amount) {
+    public enum Type {DEPOSIT, WITHDRAWAL}
+
+    private final Amount amount;
+    private final Type type;
+    private final LocalDate date;
+
+    public Transaction(Amount amount, Type type, LocalDate date) {
         this.amount = amount;
+        this.type = type;
+        this.date = date;
     }
 
     public Amount getAmount() {
@@ -18,11 +26,13 @@ public class Transaction {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transaction that = (Transaction) o;
-        return Objects.equals(amount, that.amount);
+        return Objects.equals(amount, that.amount) &&
+                type == that.type &&
+                Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(amount);
+        return Objects.hash(amount, type, date);
     }
 }
