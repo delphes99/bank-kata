@@ -25,12 +25,20 @@ public class Transaction {
         this.date = date;
     }
 
+    public Amount getSignedAmount() {
+        return amount.multiply(type.multiplier);
+    }
+
     public Amount getAmount() {
         return amount;
     }
 
-    public Amount getSignedAmount() {
-        return amount.multiply(type.multiplier);
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public Type getType() {
+        return type;
     }
 
     @Override
