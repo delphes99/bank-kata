@@ -1,19 +1,21 @@
 package fr.lgl;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Account {
-    private BigDecimal initialDeposit;
+    private final List<Transaction> transactions;
 
-    public Account() {
-        this.initialDeposit = BigDecimal.ZERO;
+    public Account(Amount initialDeposit) {
+        transactions = new ArrayList<>();
+        transactions.add(new Transaction(initialDeposit));
     }
 
-    public Account(BigDecimal initialDeposit) {
-        this.initialDeposit = initialDeposit;
+    public Amount getBalance() {
+        return transactions.stream().map(Transaction::getAmount).reduce(Amount.ZERO, Amount::add);
     }
 
-    public BigDecimal getBalance() {
-        return initialDeposit;
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
 }
