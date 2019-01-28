@@ -19,4 +19,15 @@ public class AccountTest {
                         new Transaction(Amount.of(200.0))
                 );
     }
+
+    @Test
+    public void deposit_create_transaction() {
+        var account = new Account(Amount.of(200.0));
+        account.deposit(Amount.of(300.0));
+        assertThat(account.getTransactions())
+                .containsExactly(
+                        new Transaction(Amount.of(200.0)),
+                        new Transaction(Amount.of(300.0))
+                );
+    }
 }

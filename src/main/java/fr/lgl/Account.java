@@ -18,4 +18,8 @@ public class Account {
     public List<Transaction> getTransactions() {
         return transactions;
     }
+
+    public void deposit(Amount amount) {
+        transactions.add(new Transaction(amount));
+    }
 }
