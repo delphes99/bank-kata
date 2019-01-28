@@ -46,4 +46,18 @@ public class AccountTest {
                         new Transaction(Amount.of(100.0), WITHDRAWAL, LocalDate.of(2018, 1, 2))
                 );
     }
+
+    @Test
+    public void deposit_increase_balance() {
+        var account = new Account(Amount.of(200.0), of(2018, 1, 1));
+        account.deposit(Amount.of(100.0), of(2018, 1, 2));
+        assertThat(account.getBalance()).isEqualTo(Amount.of(300.0));
+    }
+
+    @Test
+    public void withdrawal_decrease_balance() {
+        var account = new Account(Amount.of(200.0), of(2018, 1, 1));
+        account.withdrawal(Amount.of(100.0), of(2018, 1, 2));
+        assertThat(account.getBalance()).isEqualTo(Amount.of(100.0));
+    }
 }

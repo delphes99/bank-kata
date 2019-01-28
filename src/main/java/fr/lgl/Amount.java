@@ -10,14 +10,18 @@ public class Amount {
         return new Amount(new BigDecimal(value));
     }
 
-    private BigDecimal bigDecimal;
+    private BigDecimal value;
 
-    private Amount(BigDecimal bigDecimal) {
-        this.bigDecimal = bigDecimal;
+    private Amount(BigDecimal value) {
+        this.value = value;
     }
 
     public Amount add(Amount amount) {
-        return new Amount(bigDecimal.add(amount.bigDecimal));
+        return new Amount(value.add(amount.value));
+    }
+
+    public Amount multiply(Amount multiplier) {
+        return new Amount(value.multiply(multiplier.value));
     }
 
     @Override
@@ -25,11 +29,11 @@ public class Amount {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Amount amount = (Amount) o;
-        return Objects.equals(bigDecimal, amount.bigDecimal);
+        return Objects.equals(value, amount.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bigDecimal);
+        return Objects.hash(value);
     }
 }

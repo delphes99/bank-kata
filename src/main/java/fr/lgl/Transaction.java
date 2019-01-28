@@ -4,8 +4,16 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Transaction {
+    public enum Type {
+        DEPOSIT(Amount.of(1)),
+        WITHDRAWAL(Amount.of(-1));
 
-    public enum Type {DEPOSIT, WITHDRAWAL}
+        private Amount multiplier;
+
+        Type(Amount multiplier) {
+            this.multiplier = multiplier;
+        }
+    }
 
     private final Amount amount;
     private final Type type;
@@ -18,7 +26,11 @@ public class Transaction {
     }
 
     public Amount getAmount() {
-        return this.amount;
+        return amount;
+    }
+
+    public Amount getSignedAmount() {
+        return amount.multiply(type.multiplier);
     }
 
     @Override

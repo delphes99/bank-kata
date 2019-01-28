@@ -16,7 +16,7 @@ public class Account {
     }
 
     public Amount getBalance() {
-        return transactions.stream().map(Transaction::getAmount).reduce(Amount.ZERO, Amount::add);
+        return transactions.stream().map(Transaction::getSignedAmount).reduce(Amount.ZERO, Amount::add);
     }
 
     public List<Transaction> getTransactions() {
